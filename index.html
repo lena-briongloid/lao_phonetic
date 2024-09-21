@@ -26,11 +26,11 @@
 <h1>Guide</h1>
 <div style="font-size: 24px;">
 	<details><summary style="font-size: 28px"><strong>Onset Consonants</strong></summary>
-		<p>ກ = k, ຂ = kh', ຄ = kh, ງ = ng, ຈ = j or ch, ສ = s', ຊ = s, ຍ = ny</p>
-		<p>ດ = d, ຕ = t, ຖ = th', ທ = th, ນ = n, ບ = b, ປ = p, ຜ = ph', ຝ = f'</p>
-		<p>ພ = ph, ຟ = f, ມ = m, ຢ = y, ຣ = r, ລ = l, ວ = v, ຫ = h', ຮ = h</p>
-		<p>ຫງ = ng' or hng, ຫຍ = ny' or hny, ໜ = n', ຫນ = hn</p>
-		<p>ໝ = m', ຫມ = hm, ຫຼ = l', ຫລ = hl, ຫວ = v' or hv</p>
+		<p>ກ = k, ຂ = kh' or khh, ຄ = kh, ງ = ng, ຈ = j or ch, ສ = s' or sh, ຊ = s, ຍ = ny</p>
+		<p>ດ = d, ຕ = t, ຖ = th' or thh, ທ = th, ນ = n, ບ = b, ປ = p, ຜ = ph' or phh, ຝ = f' or fh</p>
+		<p>ພ = ph, ຟ = f, ມ = m, ຢ = y, ຣ = r, ລ = l, ວ = v, ຫ = h' or hh, ຮ = h</p>
+		<p>ຫງ = ng' or hng or ngh, ຫຍ = ny' or hny or nyh, ໜ = n' or nh, ຫນ = hn</p>
+		<p>ໝ = m' or mh, ຫມ = hm, ຫຼ = l' or lh, ຫລ = hl, ຫວ = v' or hv or vh</p>
 		<p>Low or Mid Consonant: ຄ = kh, ທ = th, ຊ = s, etc.</p>
 		<p>No need to input anything for ອ. If want so, ອ = x.
 	</details>
@@ -66,14 +66,14 @@
 </div>
 
 <script>
-	const Onset = ["k", "kh'", "kh", "ng", "j", "ch", "s'", "s", "ny", "d", "t", "th'", "th", "n", "b", "p", "ph'", "f'", "ph", "f", "m", "y", "r", "l", "v", "h'", "x", "h", "ng'", "ny'", "n'", "hn", "m'", "hm", "l'", "hl", "v'", "hv", "hng", "hny"];
+	const Onset = ["k", "kh'", "kh", "ng", "j", "ch", "s'", "s", "ny", "d", "t", "th'", "th", "n", "b", "p", "ph'", "f'", "ph", "f", "m", "y", "r", "l", "v", "h'", "x", "h", "ng'", "ny'", "n'", "hn", "m'", "hm", "l'", "hl", "v'", "hv", "hng", "hny", "khh", "sh", "thh", "phh", "fh", "hh", "nh", "mh", "ngh", "nyh", "vh"];
 	const Coda = ["x", "m", "n", "ng", "b", "p", "t", "d", "k", "y", "o"];
 	const Tone = ["0", "1", "2", "3", "4"];
 	const Punctuation = ["="];
 
-	const parse_criteria = /(hng|hny|aae|iia|kh'|ng'|ny'|ooe|oor|ph'|th'|uua|wwa|hv|aa|ae|ai|am|ao|ay|ch|ee|f'|h'|hl|hm|hn|ia|ii|kh|l'|m'|n'|ng|ng|ny|oe|oo|or|ph|s'|th|ua|v'|wa|ww|uu|1|2|3|4|=|a|b|d|e|f|h|i|j|k|k|l|m|m|n|n|o|o|p|p|r|s|t|t|u|v|w|x|y|y)/i;
+	const parse_criteria = /(hng|hny|aae|iia|kh'|ng'|ny'|ooe|oor|ph'|th'|uua|wwa|khh|thh|phh|ngh|nyh|sh|fh|hh|nh|mh|vh|hv|aa|ae|ai|am|ao|ay|ch|ee|f'|h'|hl|hm|hn|ia|ii|kh|l'|m'|n'|ng|ng|ny|oe|oo|or|ph|s'|th|ua|v'|wa|ww|uu|1|2|3|4|=|a|b|d|e|f|h|i|j|k|k|l|m|m|n|n|o|o|p|p|r|s|t|t|u|v|w|x|y|y)/i;
 
-	const ONS = ["ກ", "ຂ", "ຄ", "ງ", "ຈ", "ຈ", "ສ", "ຊ", "ຍ", "ດ", "ຕ", "ຖ", "ທ", "ນ", "ບ", "ປ", "ຜ", "ຝ", "ພ", "ຟ", "ມ", "ຢ", "ຣ", "ລ", "ວ", "ຫ", "ອ", "ຮ", "ຫງ", "ຫຍ", "ໜ", "ຫນ", "ໝ", "ຫມ", "ຫຼ", "ຫລ", "ຫວ", "ຫວ", "ຫງ", "ຫຍ"];
+	const ONS = ["ກ", "ຂ", "ຄ", "ງ", "ຈ", "ຈ", "ສ", "ຊ", "ຍ", "ດ", "ຕ", "ຖ", "ທ", "ນ", "ບ", "ປ", "ຜ", "ຝ", "ພ", "ຟ", "ມ", "ຢ", "ຣ", "ລ", "ວ", "ຫ", "ອ", "ຮ", "ຫງ", "ຫຍ", "ໜ", "ຫນ", "ໝ", "ຫມ", "ຫຼ", "ຫລ", "ຫວ", "ຫວ", "ຫງ", "ຫຍ", "ຂ", "ສ", "ຖ", "ຜ", "ຝ", "ຫ", "ໜ", "ໝ", "ຫງ", "ຫຍ", "ຫວ"];
 	const COD = ["", "ມ", "ນ", "ງ", "ບ", "ບ", "ດ", "ດ", "ກ", "ຍ", "ວ"];
 	const TON = ["", "່", "້", "໊", "໋"];
 	const PUN = ["ໆ"];
@@ -220,6 +220,7 @@
 
 			event.target.value = event.target.value.replaceAll(m + " ", l);
 		  		return 0;
+
 		  }, 50); // 50ms delay after the last key press
 		}
 	  }
