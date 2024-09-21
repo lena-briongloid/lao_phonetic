@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Lao Phonetic Input</title>
+	
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0">
+	<meta name="MobileOptimized" content="300">
+	<meta name="HandheldFriendly" content="true">
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Noto+Serif+Lao:wght@100..900&display=swap');
+	</style>
+
+</head>
+
+<body style="text-align: center; font-family: 'Cormorant Garamond', 'Noto Serif Lao';">
+<br><br>
+
+<h1>Input text here</h1>
+<textarea class="input" id="input" style="width: 50%; height: 300px; font-size: 48px; font-family: 'Cormorant Garamond', 'Noto Serif Lao';"></textarea>
+<br>
+<h1>Guide</h1>
+<div style="font-size: 24px;">
+	<details><summary style="font-size: 28px"><strong>Onset Consonants</strong></summary>
+		<p>ກ = k, ຂ = kh', ຄ = kh, ງ = ng, ຈ = j or ch, ສ = s', ຊ = s, ຍ = ny</p>
+		<p>ດ = d, ຕ = t, ຖ = th', ທ = th, ນ = n, ບ = b, ປ = p, ຜ = ph', ຝ = f'</p>
+		<p>ພ = ph, ຟ = f, ມ = m, ຢ = y, ຣ = r, ລ = l, ວ = v, ຫ = h', ຮ = h</p>
+		<p>ຫງ = ng' or hng, ຫຍ = ny' or hny, ໜ = n', ຫນ = hn</p>
+		<p>ໝ = m', ຫມ = hm, ຫຼ = l', ຫລ = hl, ຫວ = v' or hv</p>
+		<p>Low or Mid Consonant: ຄ = kh, ທ = th, ຊ = s, etc.</p>
+		<p>No need to input anything for ອ. If want so, ອ = x.
+	</details>
+	<br>
+	<details><summary style="font-size: 28px"><strong>Vowels</strong></summary>
+		<p>ອະ = a, ອາ = aa, ອິ = i, ອີ = ii, ອຶ = w, ອື = ww</p>
+		<p>ອຸ = u, ອູ = uu, ເອະ = e, ເອ = ee, ແອະ = ae, ແອ = aae</p>
+		<p>ໂອະ = o, ໂອ = oo, ເອາະ = or, ອໍ = oor, ເອິ = oe, ເອິ = ooe</p>
+		<p>ເອັຍ = ia, ເອຍ = ia, ເອຶອ = wa, ເອືອ = wwa, ອົວະ = ua, ອົວ = uua</p>
+		<p>ໄອ = ai, ໃອ = ay, ເອົາ = ao, ອຳ= am</p>
+	</details>
+	<br>
+	<details><summary style="font-size: 28px"><strong>Coda Consonants</strong></summary>
+		<p>ກ = k, ງ = ng, ຍ = y, ດ = d or t</p>
+		<p>ນ = n, ບ = b or p, ມ = m, ວ = o</p>
+	</details>
+	<br>
+	<details><summary style="font-size: 28px"><strong>Tones</strong></summary>
+		<p>Add one of following numbers just after a syllable.
+		<p>ອ່ = 1, ອ້ = 2, ອ໊ = 3, ອ໋ = 4</p>
+	</details>
+	<br>
+	<details><summary style="font-size: 28px"><strong>Punctuations</strong></summary>
+		<p>ໆ = =</p>
+	</details>
+	<br>
+	<details><summary style="font-size: 28px"><strong>Examples</strong></summary>
+		<p>ບໍ່ = boor1</p>
+		<p>ກັບ = kap or kab</p>
+		<p>ແຖວ = th'aaeo</p>
+		<p>ເຫຼົ້າ = l'ao2</p>
+	</details>
+</div>
+
+<script>
+	const Onset = ["k", "kh'", "kh", "ng", "j", "ch", "s'", "s", "ny", "d", "t", "th'", "th", "n", "b", "p", "ph'", "f'", "ph", "f", "m", "y", "r", "l", "v", "h'", "x", "h", "ng'", "ny'", "n'", "hn", "m'", "hm", "l'", "hl", "v'", "hv", "hng", "hny"];
+	const Coda = ["x", "m", "n", "ng", "b", "p", "t", "d", "k", "y", "o"];
+	const Tone = ["0", "1", "2", "3", "4"];
+	const Punctuation = ["="];
+
+	const parse_criteria = /(hng|hny|aae|iia|kh'|ng'|ny'|ooe|oor|ph'|th'|uua|wwa|hv|aa|ae|ai|am|ao|ay|ch|ee|f'|h'|hl|hm|hn|ia|ii|kh|l'|m'|n'|ng|ng|ny|oe|oo|or|ph|s'|th|ua|v'|wa|ww|uu|1|2|3|4|=|a|b|d|e|f|h|i|j|k|k|l|m|m|n|n|o|o|p|p|r|s|t|t|u|v|w|x|y|y)/i;
+
+	const ONS = ["ກ", "ຂ", "ຄ", "ງ", "ຈ", "ຈ", "ສ", "ຊ", "ຍ", "ດ", "ຕ", "ຖ", "ທ", "ນ", "ບ", "ປ", "ຜ", "ຝ", "ພ", "ຟ", "ມ", "ຢ", "ຣ", "ລ", "ວ", "ຫ", "ອ", "ຮ", "ຫງ", "ຫຍ", "ໜ", "ຫນ", "ໝ", "ຫມ", "ຫຼ", "ຫລ", "ຫວ", "ຫວ", "ຫງ", "ຫຍ"];
+	const COD = ["", "ມ", "ນ", "ງ", "ບ", "ບ", "ດ", "ດ", "ກ", "ຍ", "ວ"];
+	const TON = ["", "່", "້", "໊", "໋"];
+	const PUN = ["ໆ"];
+
+	// Select all forms with class 'search'
+	const searchForms = document.querySelectorAll('textarea.input');
+
+	// Function to handle input event
+	const handleInput = (event) => {
+	  // Check if the event target is a text input
+	  if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+		const inputValue = event.target.value;
+		const lastChar = inputValue[inputValue.length - 1];
+
+		// Check if the last character typed is a letter from 'a' to 'z' (case-insensitive)
+		if (lastChar && /[\s]/.test(lastChar)) {
+		  // Delay to detect when typing has ended
+		  clearTimeout(event.target.typingTimeout); // Clear previous timeout
+		  event.target.typingTimeout = setTimeout(() => {
+			
+		  	//WHAT TO DO for event.target.value
+		  	let M = event.target.value.match(/(?=[a-z=])([a-z1234=']+)/g); let m = M[M.length - 1];
+
+		  	//parse
+		  	let T = m.split(parse_criteria).filter(element => element !== "");
+
+		  	//punctuation
+		  	if (Punctuation.includes(T[0])) {
+		  		event.target.value = event.target.value.replaceAll(m + " ", PUN[Punctuation.indexOf(T[0])]);
+		  		return 0;
+		  	}
+
+		  	if (!Onset.includes(T[0])) { T.splice(0, 0, "x"); }
+		  	if (T.length < 3 || !Coda.includes(T[2])) { T.splice(2, 0, "x"); }
+		  	if (T.length < 4) { T.splice(3, 0, "0"); }
+
+		  	let fin = T[2] == "x" ? true : false;
+
+		  	let L = ["", "", "", "", "", "", ""];
+
+		  	L[1] = ONS[Onset.indexOf(T[0])];
+		  	L[4] = TON[Tone.indexOf(T[3])];
+		  	L[6] = COD[Coda.indexOf(T[2])];
+
+		  	switch (T[1]) {
+		  	case "a":
+				if (fin) { L[5] = "ະ"; }
+				else { L[3] = "ັ"; }
+			break;
+			case "i":
+				L[3] = "ິ";
+			break;
+			case "w":
+				L[3] = "ຶ";
+			break;
+			case "u":
+				L[2] = "ຸ";
+			break;
+			case "e":
+				if (fin) { L[0] = "ເ"; L[5] = "ະ"; }
+				else { L[0] = "ເ"; L[3] = "ັ"; }
+			break;
+			case "ae":
+				if (fin) { L[0] = "ແ"; L[5] = "ະ"; }
+				else { L[0] = "ແ"; L[3] = "ັ"; }
+			break;
+			case "o":
+				if (fin) { L[0] = "ໂ"; L[5] = "ະ"; }
+				else { L[3] = "ົ"; }
+			break;
+			case "or":
+				if (fin) { L[0] = "ເ"; L[5] = "າະ"; }
+				else { L[3] = "ັ"; L[5] = "ອ"; }
+			break;
+			case "oe":
+				L[0] = "ເ"; L[3] = "ິ";
+			break;
+			case "ia":
+				if (fin) { L[0] = "ເ"; L[3] = "ັ"; L[5] = "ຍ"; }
+				else { L[5] = "ຽ"; }
+			break;
+			case "wa":
+				if (fin) { L[0] = "ເ"; L[3] = "ຶ"; L[5] = "ອ"; }
+				else { L[0] = "ເ"; L[3] = "ື"; L[5] = "ອ"; }
+			break;
+			case "ua":
+				if (fin) { L[3] = "ົ"; L[5] = "ວະ"; }
+				else { L[5] = "ວ"; }
+			break;
+			case "aa":
+				L[5] = "າ";
+			break;
+			case "ii":
+				L[3] = "ີ";
+			break;
+			case "ww":
+				L[3] = "ື";
+			break;
+			case "uu":
+				L[2] = "ູ";
+			break;
+			case "ee":
+				L[0] = "ເ";
+			break;
+			case "aae":
+				L[0] = "ແ";
+			break;
+			case "oo":
+				L[0] = "ໂ";
+			break;
+			case "oor":
+				if (fin) { L[3] = "ໍ"; }
+				else { L[5] = "ອ"; }
+			break;
+			case "ooe":
+				L[0] = "ເ"; L[3] = "ີ";
+			break;
+			case "iia":
+				if (fin) { L[0] = "ເ"; L[5] = "ຍ"; }
+				else { L[5] = "ຽ"; }
+			break;
+			case "wwa":
+				L[0] = "ເ"; L[3] = "ື"; L[5] = "ອ";
+			break;
+			case "uua":
+				if (fin) { L[3] = "ົ"; L[5] = "ວ"; }
+				else { L[5] = "ວ"; }
+			break;
+			case "ai":
+				L[0] = "ໄ";
+			break;
+			case "ay":
+				L[0] = "ໃ";
+			break;
+			case "ao":
+				L[0] = "ເ"; L[3] = "ົ"; L[5] = "າ";
+			break;
+			case "am":
+				L[5] = "ຳ";
+			break;
+		  	}
+			
+			let l = L.join("");
+
+			event.target.value = event.target.value.replaceAll(m + " ", l);
+		  		return 0;
+		  }, 50); // 50ms delay after the last key press
+		}
+	  }
+	};
+
+	// Loop through each form and attach the event listener to inputs inside the form
+	searchForms.forEach(form => {
+	  form.addEventListener('input', handleInput);
+	});
+</script>
+
+</body></html>
